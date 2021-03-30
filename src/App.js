@@ -1,27 +1,22 @@
-import React, { Component } from 'react'
-import CardList from './components/Card-list/card-list.component';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import CardList from "./components/Card-list/card-list.component";
 
-export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      monsters: [
 
-      ]
+const App = () => {
+  const [monsters, setmonsters] = useState([]);
+useEffect(()=>{
+ fetch('https://jsonplaceholder.typicode.com/users')
+ .then(Response => Response.json())
+ .then(users => setmonsters({ monsters: users }))
+ console.log(Response);
+})
+ 
+  return (
+    <div className="App">
+      <CardList monsters={monsters} />
+    </div>
+  );
+};
 
-    };
-  }
-  componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(Response => Response.json())
-      .then(users => this.setState({ monsters: users }))
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <CardList monsters={this.state.monsters} />
-      </div>
-    )
-  }
-}
+export default App;
