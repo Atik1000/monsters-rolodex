@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import CardList from "./components/Card-list/Card-list.component";
+import './App.css'
 
 export default function App() {
   const [monsters, setmonsters] = useState([]);
@@ -27,7 +28,8 @@ const filterMonsters = monsters.filter((obj) =>obj.name.toLowerCase().includes(v
 
   return (
     <div className="App">
-      <input style={{marginLeft:'45%',marginBottom:'20px',marginTop:'5px',height:'30px'}} placeholder="Serch monster" type="text" value={value} onChange={handleChange} />
+    <h1>Monster Rolodex</h1>
+      <input style={{marginBottom:'20px',marginTop:'5px',height:'50px'}} placeholder="Serch monster" type="text" value={value} onChange={handleChange} />
 
       <CardList monsters={filterMonsters} />
     </div>
