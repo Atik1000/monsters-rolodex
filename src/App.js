@@ -2,19 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import CardList from "./components/Card-list/Card-list.component";
 
-
-const App = () => {
+export default function App() {
   const [monsters, setmonsters] = useState([]);
-  const [value, setValue] = useState('');
-  const handleChange = (e) =>{
+  const [value, setValue] = useState("");
+  const handleChange = (e) => {
     setValue(e.target.value);
-      
-    const filterMonsters=monsters.filter(obj=>{
-      return obj.name.toLowerCase().includes(value.toLowerCase())
-    })
 
-    console.log(filterMonsters)
-  } 
+  
+  };
   useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/users")
@@ -25,15 +20,16 @@ const App = () => {
         console.log(err);
       });
   }, []);
-  
+const filterMonsters = monsters.filter((obj) =>obj.name.toLowerCase().includes(value.toLowerCase())
+  );
+
+  console.log(filterMonsters);
 
   return (
     <div className="App">
-     <input type="text" value={value} onChange={handleChange} />
-    
-      <CardList monsters={monsters} />
+      <input style={{marginLeft:'45%',marginBottom:'20px',marginTop:'5px',height:'30px'}} placeholder="Serch monster" type="text" value={value} onChange={handleChange} />
+
+      <CardList monsters={filterMonsters} />
     </div>
   );
-};
-
-export default App;
+}
